@@ -31,14 +31,14 @@ public class Main {
 	// Point array which declares the eight moves that a knight can make.
 	private static final Point[] MOVES = new Point[] {
 			
-			new Point(2, 1),   // down-right
-			new Point(1, 2),   // right-down
-			new Point(-1, 2),  // left-down
-			new Point(-2, 1),  // up-right
-			new Point(-2, -1), // up-left
-			new Point(-1, -2), // left-up
-			new Point(1, -2),  // right-up
-			new Point(2, -1),  // down-left
+		new Point(2, 1),   // down-right
+		new Point(1, 2),   // right-down
+		new Point(-1, 2),  // left-down
+		new Point(-2, 1),  // up-right
+		new Point(-2, -1), // up-left
+		new Point(-1, -2), // left-up
+		new Point(1, -2),  // right-up
+		new Point(2, -1),  // down-left
 	};
 	
 	
@@ -50,21 +50,21 @@ public class Main {
 		//Run functions to check user input.
 		Scanner input = new Scanner(System.in);
 		inputSize(input);
-		inputRow(input);        
-        inputCol(input);
-        input.close();
-        
-        System.out.println(newLine + "---" + newLine);
-        
-        // Start timer and run algorithm.
-        startTime = System.nanoTime();
-        
-        // Instantiate the move list and add the first position.
-        currentPoint = new Point(col - BORDER, row - BORDER);
-        pointList = new ArrayList<Point>();
-        
-        // Run the program.
-        runSolution(col, row);
+		inputRow(input);       
+		inputCol(input);
+		input.close();
+		
+		System.out.println(newLine + "---" + newLine);
+		
+		// Start timer and run algorithm.
+		startTime = System.nanoTime();
+		
+		// Instantiate the move list and mark the first position.
+		currentPoint = new Point(col - BORDER, row - BORDER);
+		pointList = new ArrayList<Point>();
+		
+		// Run the program.
+		runSolution(col, row);
 	}
 	
 	public static void runSolution(int startRow, int startCol) {
@@ -89,7 +89,6 @@ public class Main {
 			System.out.println(newLine + "Success! The algorithm took " + df.format(runTime) + " milliseconds.");
 		}
 		else {
-				
 			System.out.println("There is no solution with these parameters.");
 		}
 	}
@@ -106,23 +105,27 @@ public class Main {
 			
 			// Adds the current move to the board.
 			board[p.x][p.y] = currentMove;
-			//pointList.add(new Point(p.x - BORDER, p.y - BORDER));
 			
 			// Run the function recursively until it returns true, which means a solution is found.
 			if (solution(p.x, p.y, currentMove + 1)) {
 				
+				/*
+				* If this point has been reached a solution was found, so the moves are added to a list.
+				* This list will be in reverse order because the last stack is the last move.
+				*/
+				
 				pointList.add(new Point(p.x - BORDER, p.y - BORDER));
-                return true;
-            } 
-            
-            // If there is a dead end, go back.
-            else {
-              
-            	board[p.x][p.y] = -1;
-            	//pointList.remove(pointList.size() - 1);
-            }
+				return true;
+				
+			} 
+			
+			// If there is a dead end, go back.
+			else {
+				board[p.x][p.y] = -1;
+				
+			}
 		}
-		              			
+			
 		/*
 		 * The way this algorithm works is in the nature of how recursive functions work.
 		 * Every time the 'solution' function is ran, it expects a return call.
@@ -130,7 +133,7 @@ public class Main {
 		 * In this way, when there is a dead end, instead of returning false on the initial call,
 		 * it returns false to the previous call. 
 		 * Therefore you backtrack all the way until the initial call returns false.
-	     */
+		 */
 		
 		return false;
 	}
@@ -182,13 +185,13 @@ public class Main {
 		
 		Map<Integer, Point> sortedMap = new TreeMap<Integer, Point>(map);
 		Set set = sortedMap.entrySet();
-        Iterator iterator = set.iterator();
-        
-        while(iterator.hasNext()) {
-        	
-             Map.Entry me = (Map.Entry) iterator.next();
-             list.add((Point) me.getValue());
-        }
+		Iterator iterator = set.iterator();
+		
+		while(iterator.hasNext()) {
+			
+			Map.Entry me = (Map.Entry) iterator.next();
+			list.add((Point) me.getValue());
+		}
 		
 		return list;		
 	}
@@ -209,7 +212,7 @@ public class Main {
 				
 				System.out.printf("%-8d", board[i][j]);
 			}
-		
+			
 			System.out.printf("%n");
 		}
 		
@@ -219,39 +222,35 @@ public class Main {
 		for (int i = pointList.size() - 1; i > 0; i--) {
 			
 			System.out.println("(" + pointList.get(i).x + 
-							   ", " + pointList.get(i).y + 
-							   ") to (" + pointList.get(i - 1).x + 
-							   ", " + pointList.get(i - 1).y + ")");
+					   ", " + pointList.get(i).y + 
+					   ") to (" + pointList.get(i - 1).x + 
+					   ", " + pointList.get(i - 1).y + ")");
 		}
-		
 	}
 	
 	// Initialise the board object to populate it with dummy numbers.
 	private static void initialiseBoard() {
-	    
+		
 		//In order to prevent out of bound exceptions, we create a border.
 		realSize = size + BORDER + BORDER;
 		
 		board = new int[realSize][realSize];
-	    
-	    for (int i = 0; i < realSize; i++) {
-	        for (int j = 0; j < realSize; j++) {
-	        	
-	        	// Populate border cells with 0, and movable cells with -1.
-	            if (i < BORDER || j < BORDER) {
-	            	
-	            	board[i][j] = 0;
-	            } 
-	            else if (i >= (realSize - BORDER) || j >= realSize - BORDER) {
-	            	
-	            	board[i][j] = 0;
-	            }
-	            else {
-	            	
-	            	board[i][j] = -1;
-	            }
-	        }
-	    }
+		
+		for (int i = 0; i < realSize; i++) {
+			for (int j = 0; j < realSize; j++) {
+				
+				// Populate border cells with 0, and movable cells with -1.
+				if (i < BORDER || j < BORDER) {
+					board[i][j] = 0;
+				}
+				else if (i >= (realSize - BORDER) || j >= realSize - BORDER) {
+					board[i][j] = 0;
+				}
+				else {
+					board[i][j] = -1;
+				}
+			}
+		}
 	}
 
 	// Function for reading user input.
@@ -269,7 +268,6 @@ public class Main {
 				
 				// Checks if user input is within accepted boundary.
 				if (row <= (size - 1) && row >= MIN_ROW) {
-					
 					validate = true;
 				} 
 				else {
@@ -301,7 +299,6 @@ public class Main {
 				col = scanner.nextInt();
 				
 				if (col <= (size - 1) && col >= MIN_COL) {
-					
 					validate = true;
 				} 
 				else {
@@ -332,7 +329,6 @@ public class Main {
 				size = scanner.nextInt();
 				
 				if (size <= MAX_SIZE && size >= MIN_SIZE) {
-					
 					validate = true;
 				} 
 				else {
@@ -349,4 +345,4 @@ public class Main {
 			}
 		} while (!validate);
 	}
-}      
+}
