@@ -64,7 +64,7 @@ public class Main {
 		pointList = new ArrayList<Point>();
 		
 		// Run the program.
-		runSolution(rpw, col);
+		runSolution(row, col);
 	}
 	
 	public static void runSolution(int startRow, int startCol) {
