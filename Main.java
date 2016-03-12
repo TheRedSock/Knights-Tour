@@ -5,7 +5,7 @@
  *
  * 11.03.2016
  * 
- * Copyright Torstein Røsok 2016
+ * Made by Torstein Røsok on https://github.com/TheRedSock/Knights-Tour/
  */
 
 import java.awt.Point;
