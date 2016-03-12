@@ -30,7 +30,8 @@ public class Main {
 	private final static int BORDER = 2;
 	
 	// Other global variables.
-	private static int row, col, size, realSize, board[][];
+	private static int row, col, size, realSize;
+	private static int board[][];
 	private static long startTime, endTime;
 	private static double runTime;
 	private static boolean validate = false;
