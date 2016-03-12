@@ -120,9 +120,9 @@ public class Main {
 			if (solution(p.x, p.y, currentMove + 1)) {
 				
 				/*
-				* If this point has been reached a solution was found, so the moves are added to a list.
-				* This list will be in reverse order because the last stack is the last move.
-				*/
+				 * If this point has been reached a solution was found, so the moves are added to a list.
+				 * This list will be in reverse order because the last stack is the last move.
+				 */
 				
 				pointList.add(new Point(p.x - BORDER, p.y - BORDER));
 				return true;
