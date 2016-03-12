@@ -1,3 +1,13 @@
+/*
+ * Knight's Tour Main Class
+ * 
+ * Version 1.02
+ *
+ * 11.03.2016
+ * 
+ * Copyright Torstein Røsok 2016
+ */
+
 import java.awt.Point;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
